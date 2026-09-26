@@ -161,7 +161,9 @@ impl<'a> Lookup<'a> {
         let arena = bun_alloc::Arena::new();
         let mut ast_memory_allocator = bun_ast::ASTMemoryAllocator::borrowing(&arena);
         let _ast_scope = ast_memory_allocator.enter();
-        let source = bun_ast::Source::init_path_string(path.text, contents);
+        let mut source = bun_ast::Source::init_path_string(path.text, contents);
+        // Index 0 is the runtime, which the parser handles in another way.
+        source.index = bun_ast::Index(1);
         let exports = core::cell::Cell::new(None);
         let inner = (self.depth > 0).then(|| Lookup {
             importer: *path,
