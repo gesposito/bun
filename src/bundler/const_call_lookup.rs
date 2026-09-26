@@ -41,10 +41,7 @@ pub(crate) struct Lookup<'a> {
 }
 
 impl<'a> Lookup<'a> {
-    /// `None` when no import of `importer` gets an answer.
-    ///
-    /// # Safety
-    /// `transpiler` is the one of the worker this runs on, and it outlives the lookup. Only its `options` and `resolver` are read.
+    /// `None`: no import of `importer` gets an answer. `transpiler` must be the one of the worker this runs on, and outlive the lookup.
     pub(crate) unsafe fn new(
         ctx: &'a BundleV2<'static>,
         transpiler: *mut Transpiler<'static>,

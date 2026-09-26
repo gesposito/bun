@@ -1426,6 +1426,7 @@ These rules apply to an import:
 - The bundler does not replace `ns.isDev()` on `import * as ns`, or an import with an attribute (`with { type: ... }`).
 - The bundler does not replace a call when the filter of an `onResolve` plugin matches the specifier, or when the filter of an `onLoad` plugin matches the imported file. A native plugin with `onBeforeParse` turns the replacement off for imports.
 - The bundler does not replace a call of an import from a package that has both a `"main"` and a `"module"` file, because the bundler can use one or the other.
+- The bundler does not replace a call of an import in a build with server components.
 
 The thread that parses the file with the condition also parses the imported file, one time for each build, to find out what the function returns.
 
@@ -1434,7 +1435,7 @@ The thread that parses the file with the condition also parses the imported file
 - The build does not use `minify.syntax`.
 - The file imports a [macro](/bundler/macros).
 - The React Compiler or React Fast Refresh reads the file.
-- The build is for the development server, or it has server components.
+- The build is for the development server.
 - The build does not bundle (`--no-bundle`, `Bun.Transpiler`, `bun run`).
 - The environment variable `BUN_FEATURE_FLAG_DISABLE_CONST_CALL_FOLDING=1` is set. Use it to find out if this replacement causes a difference in the output.
 
