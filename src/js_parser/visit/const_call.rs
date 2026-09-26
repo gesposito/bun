@@ -115,7 +115,6 @@ pub(crate) fn const_calls_allowed(options: &crate::parse::parse_entry::Options<'
     options.bundle
         // The same switch as for the values of `const` declarations.
         && options.features.inlining
-        && options.tree_shaking
         && options.features.dead_code_elimination
         && !options.features.hot_module_reloading
         && !options.features.react_fast_refresh
